@@ -34,7 +34,6 @@ pipeline_pattern=""
 session=""
 job_directory=""
 destination_directory="."
-dry_run_flag=""
 verbose_flag=""
 declare -a file_regexes=()
 
@@ -57,9 +56,6 @@ while getopts "u:p:l:s:j:r:d:nvh" option; do
 			;;
 		d)
 			destination_directory="$OPTARG"
-			;;
-		n)
-			dry_run_flag="--dry-run"
 			;;
 		v)
 			verbose_flag="--verbose"
@@ -193,11 +189,6 @@ fi
 echo "Found $(echo "$file_list" | wc -l) matching files" >&2
 
 rsync_options=("-avz" "--progress")
-
-if [[ -n "$dry_run_flag" ]]; then
-	rsync_options+=("$dry_run_flag")
-	echo "DRY RUN MODE - No files will be transferred" >&2
-fi
 
 if [[ -n "$verbose_flag" ]]; then
 	rsync_options+=("$verbose_flag")
