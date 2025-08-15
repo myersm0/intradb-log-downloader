@@ -79,7 +79,7 @@ if [[ -z "$username" ]] || [[ -z "$project" ]] || [[ -z "$pipeline_pattern" ]] |
 fi
 
 if [[ ${#file_regexes[@]} -eq 0 ]]; then
-	file_regexes=("stdout$" "stderr$")
+	file_regexes=("stdout$" "stderr$" "error")
 fi
 
 remote_host="${username}@login3.chpc.wustl.edu"
